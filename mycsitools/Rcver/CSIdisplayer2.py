@@ -42,7 +42,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
         super(Ui_MainWindow, self).__init__()
         self.setupUi(self)
         self.retranslateUi(self)
-        self.name_text="0"
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
@@ -116,12 +115,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.menubar.setObjectName(_fromUtf8("menubar"))
         MainWindow.setMenuBar(self.menubar)
 
-        #
-        self.texteditor_1=QtGui.QLineEdit("0")
-        self.texteditor_1.move(20,20)
-        self.texteditor_1.resize(40, 40)
-        #
-
         self.connect(self.checkBox_4, QtCore.SIGNAL('clicked()'), self.checkBoxChange)
         self.connect(self.checkBox_5, QtCore.SIGNAL('clicked()'), self.checkBoxChange)
         self.connect(self.checkBox_6, QtCore.SIGNAL('clicked()'), self.checkBoxChange)
@@ -129,10 +122,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.connect(self.spinBox_2, QtCore.SIGNAL('valueChanged(int)'), self.lineLengthChange)
         self.connect(self.radioButton_2, QtCore.SIGNAL('clicked(bool)'), self.radio_ampClicked)
         self.connect(self.radioButton, QtCore.SIGNAL('clicked(bool)'), self.radio_phaClicked)
-
-        #
-        self.connect(self.texteditor_1, QtCore.SIGNAL('editingFinished()'), self.editingFinished)
-        #
         self.drawPic(MainWindow)
 
         self.retranslateUi(MainWindow)
@@ -159,12 +148,6 @@ class Ui_MainWindow(QtGui.QMainWindow):
 	    pid.kill()
             pid.join()    
 	event.accept()
-
-    #
-    def editingFinished(text):
-        self.name_text =text
-
-    #
 
     def radio_ampClicked(self):
         self.data = [list() for i in range(nAntenna * nPlots)]

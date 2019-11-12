@@ -9,9 +9,6 @@ import time
 import select
 import socket
 
-#
-import CSIdisplayer2 as cdis
-#
 
 class csiReader:
     def __init__(self, debugMode=True):
@@ -21,14 +18,8 @@ class csiReader:
         self.count = 0
         self.time_start = 0
         # self.queue = Queue.Queue(maxsize=100);
-
-        #
-        self.name_count = 0
-        #
-
-
-        self.logName = "csilog %s_%s.log" % (cdis.Ui_MainWindow.name_text,self.name_count)
-        self.csiResultFile = "csiDate %s_%s.csv" % (cdis.Ui_MainWindow.name_text,self.name_count)
+        self.logName = "csilog%s.log" % time.time()
+        self.csiResultFile = "csiDate%s.csv" % time.time()
         if not self.debugMode:
             self.local_socket = self.init_local_socket()
             path = os.popen('find / -path */linux-80211n-csitool-supplementary').read().strip()
@@ -84,11 +75,6 @@ class csiReader:
         # connection.close()
 
     def process_bfee(self, inBytes):
-
-        #
-        self.name_count += 1
-        #
-
         timestamp_low = int(inBytes[3] + inBytes[2] + inBytes[1] + inBytes[0], 16)
         if self.count == 1:
             self.time_start = timestamp_low
@@ -145,11 +131,6 @@ class csiReader:
         s = ''
         with open(self.csiResultFile, 'a+') as csiResult:
             s += str(timestamp_low) + ','
-
-            #my
-
-            #my
-
             # csiResult.write(str(timestamp_low) + ',')
             for i in csiSortByrAnt:
                 s += str(i).replace('[', '', -1).replace(']', '', -1).replace('(', '', -1).replace(')', '', -1).replace(
