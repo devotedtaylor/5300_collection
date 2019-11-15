@@ -117,6 +117,14 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.label_6.setObjectName(_fromUtf8("label_6"))
 
         #
+        #开始按钮 结束按钮
+        self.button_Start = QtGui.QPushButton(self.centralwidget)
+        self.button_Start.setGeometry(QtCore.QRect(20, 500, 75, 23))
+        self.button_Start.setObjectName(_fromUtf8("button_Start"))
+        self.button_end = QtGui.QPushButton(self.centralwidget)
+        self.button_end.setGeometry(QtCore.QRect(110, 500, 75, 23))
+        self.button_end.setObjectName(_fromUtf8("button_end"))
+
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtGui.QStatusBar(MainWindow)
         self.statusbar.setObjectName(_fromUtf8("statusbar"))
@@ -138,6 +146,12 @@ class Ui_MainWindow(QtGui.QMainWindow):
         #
         self.connect(self.lineEdit, QtCore.SIGNAL('editingFinished()'), self.editingFinished)
         #
+        #连接按钮相应函数
+        QtCore.QObject.connect(self.button_Start, QtCore.SIGNAL(_fromUtf8("clicked()")), MainWindow.start_click)
+        QtCore.QObject.connect(self.button_end, QtCore.SIGNAL(_fromUtf8("clicked()")), MainWindow.end_click)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+
         self.drawPic(MainWindow)
 
         self.retranslateUi(MainWindow)
@@ -158,13 +172,17 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.label_5.setText(_translate("MainWindow", "Line Length", None))
         self.lineEdit.setText(_translate("MainWindow", "0", None))
         self.label_6.setText(_translate("MainWindow", "Save Name", None))
+        self.button_Start.setText(_translate("MainWindow", "Start", None))
+        self.button_end.setText(_translate("MainWindow", "End", None))
+
+
 
     def closeEvent(self, event):
         global pid, e
         e.set()
         if debugMode:
 	    pid.kill()
-            pid.join()    
+            pid.join()
 	event.accept()
 
     #
@@ -174,7 +192,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
     #
 
     def radio_ampClicked(self):
-        
+
 
         self.data = [list() for i in range(nAntenna * nPlots)]
         self.timestamps = []
@@ -305,6 +323,14 @@ class Ui_MainWindow(QtGui.QMainWindow):
             if r < 0:
                 return r + 2 * cmath.pi
             return r
+
+    #按钮响应函数
+    def start_click(self):
+        print("PyQt button start click")
+
+    def end_click(self):
+        print("PyQt button end click")
+
 
 
 def startRcv(debug, reader):
