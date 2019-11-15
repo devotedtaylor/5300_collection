@@ -1,0 +1,150 @@
+# -*- coding: utf-8 -*-
+
+# Form implementation generated from reading ui file 'CSIdisplayer2new.ui'
+#
+# Created by: PyQt4 UI code generator 4.11.4
+#
+# WARNING! All changes made in this file will be lost!
+
+from PyQt4 import QtCore, QtGui
+import sys
+import cmath
+
+try:
+    _fromUtf8 = QtCore.QString.fromUtf8
+except AttributeError:
+    def _fromUtf8(s):
+        return s
+
+try:
+    _encoding = QtGui.QApplication.UnicodeUTF8
+    def _translate(context, text, disambig):
+        return QtGui.QApplication.translate(context, text, disambig, _encoding)
+except AttributeError:
+    def _translate(context, text, disambig):
+        return QtGui.QApplication.translate(context, text, disambig)
+
+class Ui_MainWindow(QtGui.QMainWindow):
+    def __init__(self):
+        super(Ui_MainWindow,self).__init__()
+        self.setupUi(self)
+        self.retranslateUi(self)
+
+    def setupUi(self, MainWindow):
+        MainWindow.setObjectName(_fromUtf8("MainWindow"))
+        MainWindow.resize(1436, 868)
+        self.centralwidget = QtGui.QWidget(MainWindow)
+        self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
+        self.verticalLayoutWidget = QtGui.QWidget(self.centralwidget)
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(210, 0, 1201, 791))
+        self.verticalLayoutWidget.setObjectName(_fromUtf8("verticalLayoutWidget"))
+        self.verticalLayout = QtGui.QVBoxLayout(self.verticalLayoutWidget)
+        self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
+        self.splitter_6 = QtGui.QSplitter(self.centralwidget)
+        self.splitter_6.setGeometry(QtCore.QRect(10, 60, 182, 351))
+        self.splitter_6.setOrientation(QtCore.Qt.Vertical)
+        self.splitter_6.setObjectName(_fromUtf8("splitter_6"))
+        self.label_4 = QtGui.QLabel(self.splitter_6)
+        font = QtGui.QFont()
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_4.setFont(font)
+        self.label_4.setObjectName(_fromUtf8("label_4"))
+        self.splitter_4 = QtGui.QSplitter(self.splitter_6)
+        self.splitter_4.setOrientation(QtCore.Qt.Vertical)
+        self.splitter_4.setObjectName(_fromUtf8("splitter_4"))
+        self.label = QtGui.QLabel(self.splitter_4)
+        self.label.setObjectName(_fromUtf8("label"))
+        self.checkBox_4 = QtGui.QCheckBox(self.splitter_4)
+        self.checkBox_4.setObjectName(_fromUtf8("checkBox_4"))
+        self.checkBox_5 = QtGui.QCheckBox(self.splitter_4)
+        self.checkBox_5.setObjectName(_fromUtf8("checkBox_5"))
+        self.checkBox_6 = QtGui.QCheckBox(self.splitter_4)
+        self.checkBox_6.setObjectName(_fromUtf8("checkBox_6"))
+        self.splitter_2 = QtGui.QSplitter(self.splitter_6)
+        self.splitter_2.setOrientation(QtCore.Qt.Vertical)
+        self.splitter_2.setObjectName(_fromUtf8("splitter_2"))
+        self.label_3 = QtGui.QLabel(self.splitter_2)
+        self.label_3.setObjectName(_fromUtf8("label_3"))
+        self.splitter = QtGui.QSplitter(self.splitter_2)
+        self.splitter.setOrientation(QtCore.Qt.Horizontal)
+        self.splitter.setObjectName(_fromUtf8("splitter"))
+        self.label_2 = QtGui.QLabel(self.splitter)
+        self.label_2.setObjectName(_fromUtf8("label_2"))
+        self.spinBox = QtGui.QSpinBox(self.splitter)
+        self.spinBox.setMinimum(1)
+        self.spinBox.setMaximum(30)
+        self.spinBox.setObjectName(_fromUtf8("spinBox"))
+        self.splitter_3 = QtGui.QSplitter(self.splitter_6)
+        self.splitter_3.setOrientation(QtCore.Qt.Horizontal)
+        self.splitter_3.setObjectName(_fromUtf8("splitter_3"))
+        self.radioButton_2 = QtGui.QRadioButton(self.splitter_3)
+        self.radioButton_2.setChecked(True)
+        self.radioButton_2.setObjectName(_fromUtf8("radioButton_2"))
+        self.radioButton = QtGui.QRadioButton(self.splitter_3)
+        self.radioButton.setObjectName(_fromUtf8("radioButton"))
+        self.splitter_5 = QtGui.QSplitter(self.splitter_6)
+        self.splitter_5.setOrientation(QtCore.Qt.Horizontal)
+        self.splitter_5.setObjectName(_fromUtf8("splitter_5"))
+        self.label_5 = QtGui.QLabel(self.splitter_5)
+        self.label_5.setObjectName(_fromUtf8("label_5"))
+        self.spinBox_2 = QtGui.QSpinBox(self.splitter_5)
+        self.spinBox_2.setMinimum(100)
+        self.spinBox_2.setMaximum(1000)
+        self.spinBox_2.setSingleStep(100)
+        self.spinBox_2.setObjectName(_fromUtf8("spinBox_2"))
+        self.lineEdit = QtGui.QLineEdit(self.centralwidget)
+        self.lineEdit.setGeometry(QtCore.QRect(80, 450, 113, 20))
+        self.lineEdit.setObjectName(_fromUtf8("lineEdit"))
+        self.label_6 = QtGui.QLabel(self.centralwidget)
+        self.label_6.setGeometry(QtCore.QRect(10, 450, 61, 21))
+        self.label_6.setObjectName(_fromUtf8("label_6"))
+        self.button_Start = QtGui.QPushButton(self.centralwidget)
+        self.button_Start.setGeometry(QtCore.QRect(20, 500, 75, 23))
+        self.button_Start.setObjectName(_fromUtf8("button_Start"))
+        self.button_end = QtGui.QPushButton(self.centralwidget)
+        self.button_end.setGeometry(QtCore.QRect(110, 500, 75, 23))
+        self.button_end.setObjectName(_fromUtf8("button_end"))
+        MainWindow.setCentralWidget(self.centralwidget)
+        self.statusbar = QtGui.QStatusBar(MainWindow)
+        self.statusbar.setObjectName(_fromUtf8("statusbar"))
+        MainWindow.setStatusBar(self.statusbar)
+        self.menubar = QtGui.QMenuBar(MainWindow)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1436, 23))
+        self.menubar.setObjectName(_fromUtf8("menubar"))
+        MainWindow.setMenuBar(self.menubar)
+
+        self.retranslateUi(MainWindow)
+        QtCore.QObject.connect(self.button_Start, QtCore.SIGNAL(_fromUtf8("clicked()")), MainWindow.start_click)
+        QtCore.QObject.connect(self.button_end, QtCore.SIGNAL(_fromUtf8("clicked()")), MainWindow.end_click)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+    def retranslateUi(self, MainWindow):
+        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow", None))
+        self.label_4.setText(_translate("MainWindow", "Display Setting", None))
+        self.label.setText(_translate("MainWindow", "Antenna Setting", None))
+        self.checkBox_4.setText(_translate("MainWindow", "Antenna 1", None))
+        self.checkBox_5.setText(_translate("MainWindow", "Antenna 2", None))
+        self.checkBox_6.setText(_translate("MainWindow", "Antenna 3", None))
+        self.label_3.setText(_translate("MainWindow", "Channel Setting", None))
+        self.label_2.setText(_translate("MainWindow", "Mod", None))
+        self.radioButton_2.setText(_translate("MainWindow", "Amplititude", None))
+        self.radioButton.setText(_translate("MainWindow", "Phase", None))
+        self.label_5.setText(_translate("MainWindow", "Line Length", None))
+        self.lineEdit.setText(_translate("MainWindow", "0", None))
+        self.label_6.setText(_translate("MainWindow", "Save Name", None))
+        self.button_Start.setText(_translate("MainWindow", "Start", None))
+        self.button_end.setText(_translate("MainWindow", "End", None))
+
+
+    def start_click(self):
+        print("PyQt5 button click")
+
+    def end_click(self):
+        print("PyQt5 button click")
+
+if __name__ == "__main__":
+    app = QtGui.QApplication(sys.argv)
+    win = Ui_MainWindow()
+    win.show()
+    app.exec_()
