@@ -7,6 +7,8 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
+import pyqtgraph
+import time
 import sys
 import cmath
 
@@ -93,31 +95,56 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.spinBox_2.setMaximum(1000)
         self.spinBox_2.setSingleStep(100)
         self.spinBox_2.setObjectName(_fromUtf8("spinBox_2"))
+
+        #
         self.lineEdit = QtGui.QLineEdit(self.centralwidget)
         self.lineEdit.setGeometry(QtCore.QRect(80, 450, 113, 20))
         self.lineEdit.setObjectName(_fromUtf8("lineEdit"))
         self.label_6 = QtGui.QLabel(self.centralwidget)
         self.label_6.setGeometry(QtCore.QRect(10, 450, 61, 21))
         self.label_6.setObjectName(_fromUtf8("label_6"))
+
+        #
+        #开始按钮 结束按钮
         self.button_Start = QtGui.QPushButton(self.centralwidget)
         self.button_Start.setGeometry(QtCore.QRect(20, 500, 75, 23))
         self.button_Start.setObjectName(_fromUtf8("button_Start"))
         self.button_end = QtGui.QPushButton(self.centralwidget)
         self.button_end.setGeometry(QtCore.QRect(110, 500, 75, 23))
         self.button_end.setObjectName(_fromUtf8("button_end"))
+
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtGui.QStatusBar(MainWindow)
         self.statusbar.setObjectName(_fromUtf8("statusbar"))
         MainWindow.setStatusBar(self.statusbar)
         self.menubar = QtGui.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 1436, 23))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1436, 26))
         self.menubar.setObjectName(_fromUtf8("menubar"))
         MainWindow.setMenuBar(self.menubar)
 
-        self.retranslateUi(MainWindow)
+
+        self.connect(self.checkBox_4, QtCore.SIGNAL('clicked()'), self.checkBoxChange)
+        self.connect(self.checkBox_5, QtCore.SIGNAL('clicked()'), self.checkBoxChange)
+        self.connect(self.checkBox_6, QtCore.SIGNAL('clicked()'), self.checkBoxChange)
+        self.connect(self.spinBox, QtCore.SIGNAL('valueChanged(int)'), self.checkBoxChange)
+        self.connect(self.spinBox_2, QtCore.SIGNAL('valueChanged(int)'), self.lineLengthChange)
+        self.connect(self.radioButton_2, QtCore.SIGNAL('clicked(bool)'), self.radio_ampClicked)
+        self.connect(self.radioButton, QtCore.SIGNAL('clicked(bool)'), self.radio_phaClicked)
+
+        #
+        self.connect(self.lineEdit, QtCore.SIGNAL('editingFinished()'), self.editingFinished)
+        #
+        #连接按钮相应函数
         QtCore.QObject.connect(self.button_Start, QtCore.SIGNAL(_fromUtf8("clicked()")), MainWindow.start_click)
         QtCore.QObject.connect(self.button_end, QtCore.SIGNAL(_fromUtf8("clicked()")), MainWindow.end_click)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+
+        self.drawPic(MainWindow)
+
+        self.retranslateUi(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        self.timer.start(0)
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow", None))
@@ -136,12 +163,68 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.button_Start.setText(_translate("MainWindow", "Start", None))
         self.button_end.setText(_translate("MainWindow", "End", None))
 
+    def checkBoxChange(self):
+        print("checkBoxChange")
+
+    def editingFinished(self):
+        print("editingFinished")
+
+    def radio_ampClicked(self):
+        print("radio_ampClicked")
+
+    def lineLengthChange(self):
+        print("lineLengthChange")
+
+
+    def drawPic(self, MainWindow):
+
+        self.pw = pyqtgraph.PlotWidget(name='plots')
+
+        p = self.pw.plot()
+        # p.setClipToView(True)
+
+        # curves = [p.plot(pen=(i,nPlots*1.3)) for i in range(nPlots)]
+
+        for i in range(nAntenna * nPlots):
+            c = pyqtgraph.PlotCurveItem(pen=(i, nAntenna * nPlots * 1.3))
+            # 设置线的颜色
+            self.pw.addItem(c)
+            c.setPos(0, 0)
+            # 设置每根线的基准位置（原点）
+            curves.append(c)
+        # self.pw.setYRange(0, 60)
+        # self.pw.setXRange(0, nSamples)
+        # self.pw.resize(1000, 2000)
+        MainWindow.verticalLayout.addWidget(self.pw)
+        # threading.Thread(target=self.updateData())
+        self.timer = QtCore.QTimer()
+        self.timer.timeout.connect(self.updateData)
+
+    def updateData(self):
+        print("updateData")
+
+        
+    def radio_phaClicked(self):
+        print("radio_ampClicked")
 
     def start_click(self):
-        print("PyQt5 button click")
+        print("PyQt4 button click")
 
     def end_click(self):
-        print("PyQt5 button click")
+        print("PyQt4 button click")
+
+
+pid = -1
+curves = []
+nAntenna = 4;
+nPlots = 30  # 30个子载波
+
+ptr = 0
+lastTime = time.time()
+fps = 0
+length = 100
+debugMode = False
+flag = True
 
 if __name__ == "__main__":
     app = QtGui.QApplication(sys.argv)
